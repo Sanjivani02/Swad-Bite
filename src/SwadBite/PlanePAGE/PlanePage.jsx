@@ -169,7 +169,7 @@ const PlanPage = () => {
               </div>
             </div>
             <div className="right-side">
-              <button className="renew-button">Renew Plan</button>
+              <button className="renew-button" onClick={() => navigate('/WeeklyMenu')}>Renew Plan</button>
               <div className="calendar-container">
                 <div className="calendar-box" onClick={handleCalendarClick}>
                   <FaCalendarAlt />
