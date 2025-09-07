@@ -2,8 +2,7 @@ import axios from "axios";
 
 // Create a single API instance
 const API = axios.create({
-  const API_BASE_URL = "https://your-backend-service.onrender.com", 
-// instead of http://localhost:5000
+ baseURL: "http://localhost:5000/api",// your backend base URL
 });
 
 // Orders
