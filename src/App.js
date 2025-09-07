@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
+import { Navigate } from "react-router-dom";
 import HomeMain from "./SwadBite/HomePAge/HomeMain";
 import Cart from "./SwadBite/CartPage/Cart";
 import Footer from "./SwadBite/HomePAge/Footer";
@@ -46,6 +47,16 @@ function App() {
   if (showCurtain) {
     return <CurtainIntro onFinish={() => setShowCurtain(false)} />;
   }
+
+  const ProtectedRoute = ({ children }) => {
+  const { user } = useContext(AuthContext);
+
+  if (!user) {
+    return <Navigate to="/login" replace />;
+  }
+
+  return children;
+};
 
   return (
     <div className="App">
@@ -112,7 +123,10 @@ function App() {
         <Route path="/order" element={<Order />} />
         <Route path="/feedback" element={<FeedbackForm />} />
         <Route path="/cart" element={<Cart />} />
-        <Route path="*" element={<PlanPage />} />
+        <Route path="/plan" element={<ProtectedRoute><PlanPage /></ProtectedRoute>
+  }
+/>
+
       </Routes>
 
       {/* Footer always visible except on WelcomePage */}

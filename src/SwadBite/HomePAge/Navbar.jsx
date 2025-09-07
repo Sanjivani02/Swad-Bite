@@ -1,17 +1,15 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faShoppingCart} from "@fortawesome/free-solid-svg-icons"; // added cart icon
+import { faShoppingCart } from "@fortawesome/free-solid-svg-icons"; // added cart icon
 import { FaBars } from "react-icons/fa";
 import logo from "../Images/Logo.png";
-import { useContext } from "react";
 import { AuthContext } from "./AuthContext";
 import ProfileMenu from "./ProfileMenu";
 
 const Navbar = ({ onTriggerCurtain }) => {
   const [menuOpen, setMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
-
 
   const location = useLocation();
 
@@ -59,18 +57,21 @@ const Navbar = ({ onTriggerCurtain }) => {
           <Link to="/feedback" className={linkClasses("/feedback")}>Feedback</Link>
           <Link to="/order" className={linkClasses("/order")}>Orders</Link>
           <Link to="/cart" className={linkClasses("/cart")}>
-            <FontAwesomeIcon icon={faShoppingCart} size="lg" />Cart
+            <FontAwesomeIcon icon={faShoppingCart} size="lg" /> Cart
           </Link>
 
-        {!user ? (
-  <Link to="/login" className={linkClasses("/login")}>
-    Login
-  </Link>
-) : (
-  <ProfileMenu onLogout={logout} />
-)}
+          {/* ✅ Show Plans only when logged in */}
+          {user && (
+            <Link to="/plan" className={linkClasses("/plan")}>Plans</Link>
+          )}
 
-
+          {!user ? (
+            <Link to="/login" className={linkClasses("/login")}>
+              Login
+            </Link>
+          ) : (
+            <ProfileMenu onLogout={logout} />
+          )}
         </div>
 
         {/* Mobile Hamburger */}
@@ -93,7 +94,14 @@ const Navbar = ({ onTriggerCurtain }) => {
               { path: "/explore", label: "Explore" },
               { path: "/feedback", label: "Feedback" },
               { path: "/order", label: "Orders" },
-              { path: "/cart", label: <FontAwesomeIcon icon={faShoppingCart} size="lg" /> },
+              {
+                path: "/cart",
+                label: (
+                  <>
+                    <FontAwesomeIcon icon={faShoppingCart} size="lg" /> Cart
+                  </>
+                ),
+              },
             ].map((item) => (
               <Link
                 key={item.path}
@@ -105,15 +113,24 @@ const Navbar = ({ onTriggerCurtain }) => {
               </Link>
             ))}
 
+            {/* ✅ Show Plans only when logged in */}
+            {user && (
+              <Link
+                to="/plan"
+                className={`${linkClasses("/plan")} block border-b`}
+                onClick={() => setMenuOpen(false)}
+              >
+                Plans
+              </Link>
+            )}
+
             {!user ? (
-  <Link to="/login" className={linkClasses("/login")}>
-    Login
-  </Link>
-) : (
-  <ProfileMenu onLogout={logout} />
-)}
-
-
+              <Link to="/login" className={linkClasses("/login")}>
+                Login
+              </Link>
+            ) : (
+              <ProfileMenu onLogout={logout} />
+            )}
           </div>
         </div>
       )}
