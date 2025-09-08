@@ -2,9 +2,7 @@ import axios from "axios";
 
 // Create a single API instance
 const API = axios.create({
-// const API = "http://localhost:5000";
-const API = "https://swadbite-backend.onrender.com",
-
+ baseURL: "http://localhost:5000/api",// your backend base URL
 });
 
 // Orders
