@@ -9,6 +9,7 @@ function OrderSummary() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    // Load cart, selected meal, or plan from localStorage
     const savedCart = JSON.parse(localStorage.getItem("swadbite_cart")) || [];
     const selectedMeal = JSON.parse(localStorage.getItem("swadbite_selectedMeal"));
     const selectedPlan = JSON.parse(localStorage.getItem("swadbite_selectedPlan"));
@@ -18,6 +19,7 @@ function OrderSummary() {
     else if (selectedPlan) setOrderItems([selectedPlan]);
   }, []);
 
+  // Calculate amounts
   const baseFee = orderItems.reduce(
     (sum, item) => sum + (item.price || 0) * (item.quantity || 1),
     0
@@ -26,6 +28,7 @@ function OrderSummary() {
   const maintenance = +(baseFee * 0.02).toFixed(2);
   const total = +(baseFee + gst + maintenance).toFixed(2);
 
+  // Place order
   const handleConfirmOrder = async () => {
     if (orderItems.length === 0) return alert("No items to order!");
 
@@ -46,15 +49,20 @@ function OrderSummary() {
       const res = await saveOrder(newOrder);
       console.log("📥 Response:", res);
 
-      if (res.status === 201) {
+      if (res.status === 201 || res.status === 200) {
         alert("✅ Order placed successfully!");
         setOrderPlaced(true);
 
         // Clear cart & selections
-        // localStorage.removeItem("swadbite_cart");
-        // localStorage.removeItem("swadbite_selectedMeal");
-        // localStorage.removeItem("swadbite_selectedPlan");
+        localStorage.removeItem("swadbite_cart");
+        localStorage.removeItem("swadbite_selectedMeal");
+        localStorage.removeItem("swadbite_selectedPlan");
         setOrderItems([]);
+
+        // Redirect to Orders page after short delay
+        setTimeout(() => {
+          navigate("/orders");
+        }, 1500);
       }
     } catch (err) {
       console.error("❌ Failed to place order:", err.response?.data || err.message);
@@ -62,6 +70,7 @@ function OrderSummary() {
     }
   };
 
+  // Render empty state
   if (orderItems.length === 0 && !orderPlaced) {
     return (
       <>
