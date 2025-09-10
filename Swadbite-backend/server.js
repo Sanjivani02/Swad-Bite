@@ -154,6 +154,10 @@ app.post("/api/offers", async (req, res) => {
 // ======================
 // 🚀 MongoDB Connection
 // ======================
+// ✅ Add this before mongoose.connect(...)
+app.get("/", (req, res) => {
+  res.send("✅ SwadBite Backend is running on Render!");
+});
 
 mongoose
   .connect(process.env.MONGO_URI)
