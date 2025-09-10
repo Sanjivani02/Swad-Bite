@@ -2,7 +2,7 @@ import axios from "axios";
 
 // Create a single API instance
 const API = axios.create({
- baseURL: "http://localhost:5000/api",// your backend base URL
+ const API = "https://swad-tgay.onrender.com",// your backend base URL
 });
 
 // Orders
