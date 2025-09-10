@@ -82,9 +82,10 @@ const Cart = () => {
     if (itemsToPay.length === 0) return;
 
     localStorage.setItem(
-      "swadbite_cart",
-      JSON.stringify({ items: itemsToPay })
-    );
+  "swadbite_cart",
+  JSON.stringify(itemsToPay) // ✅ directly save array
+);
+
 
     // Clear selected meal/plan to avoid conflicts
     localStorage.removeItem("swadbite_selectedMeal");
