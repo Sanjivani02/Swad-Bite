@@ -1,19 +1,16 @@
 import axios from "axios";
 
-// ✅ Backend base URL (Render)
-const BASE_URL = "https://swad-tgay.onrender.com/api";
-
-// ✅ Create axios instance
+// Create a single API instance pointing to Render backend
 const API = axios.create({
-  baseURL: BASE_URL,
+  baseURL: "https://swadbite-backend-2.onrender.com/api", // ✅ your deployed backend
 });
 
-// ---------------- Orders ----------------
-export const createOrder = (data) => API.post("/orders", data);
-export const getAllOrders = () => API.get("/orders");
-export const getOrdersByUser = (userId) => API.get(`/orders/user/${userId}`);
-export const saveOrder = (data) => API.post("/orders", data);
+// Orders
+export const createOrder = (data) => API.post("/orderHistory", data);
+export const getAllOrders = () => API.get("/orderHistory");
+export const getOrdersByUser = (userId) => API.get(`/orderHistory/${userId}`);
+export const saveOrder = (data) => API.post("/orderHistory", data);
 
-// ---------------- Feedback ----------------
+// Feedback
 export const getFeedback = () => API.get("/feedback");
 export const submitFeedback = (data) => API.post("/feedback", data);
