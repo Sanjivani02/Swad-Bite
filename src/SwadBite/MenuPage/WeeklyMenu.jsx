@@ -415,10 +415,10 @@ const handleOrderNow = (mealType, mealName, dish) => {
         <div className="subscription-grid">
           <div className="subscription-card basic">
             <h3>Basic Plan</h3>
-            <p className="price">₹799 <span>/ Week</span></p>
+            <p className="price">₹799 <span>/ Month</span></p>
             <ul>
               <li>✔ Breakfast Only</li>
-              <li>✔ 7 Days Access</li>
+              <li>✔ 1 Month Access</li>
               <li>✔ Home-Style Meals</li>
             </ul>
            <button onClick={() => handleWeek()}>
@@ -428,10 +428,10 @@ const handleOrderNow = (mealType, mealName, dish) => {
 
           <div className="subscription-card standard">
             <h3>Standard Plan</h3>
-            <p className="price">₹1299 <span>/ Week</span></p>
+            <p className="price">₹1299 <span>/ Month</span></p>
             <ul>
               <li>✔ Lunch + Dinner</li>
-              <li>✔ 7 Days Access</li>
+              <li>✔ 1 Month Access</li>
               <li>✔ Fresh Ingredients</li>
             </ul>
             <button
@@ -442,10 +442,10 @@ const handleOrderNow = (mealType, mealName, dish) => {
 
           <div className="subscription-card premium">
             <h3>Premium Plan</h3>
-            <p className="price">₹1799 <span>/ Week</span></p>
+            <p className="price">₹1799 <span>/ Month </span></p>
             <ul>
               <li>✔ All 3 Meals</li>
-              <li>✔ 7 Days Access</li>
+              <li>✔ 1 Month Access</li>
               <li>✔ Priority Service</li>
             </ul>
             <button
