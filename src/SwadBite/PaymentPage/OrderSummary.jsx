@@ -9,11 +9,11 @@ function OrderSummary() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    const cart = JSON.parse(localStorage.getItem("swadbite_cart")) || [];
+    const savedCart = JSON.parse(localStorage.getItem("swadbite_cart")) || [];
     const selectedMeal = JSON.parse(localStorage.getItem("swadbite_selectedMeal"));
     const selectedPlan = JSON.parse(localStorage.getItem("swadbite_selectedPlan"));
 
-    if (cart.length > 0) setOrderItems(cart);
+    if (savedCart.length > 0) setOrderItems(savedCart);
     else if (selectedMeal) setOrderItems([selectedMeal]);
     else if (selectedPlan) setOrderItems([selectedPlan]);
   }, []);
